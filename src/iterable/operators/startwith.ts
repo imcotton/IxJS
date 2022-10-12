@@ -12,12 +12,8 @@ export class StartWithIterable<TSource> extends IterableX<TSource> {
   }
 
   *[Symbol.iterator]() {
-    for (const x of this._args) {
-      yield x;
-    }
-    for (const item of this._source) {
-      yield item;
-    }
+    yield* this._args;
+    yield* this._source;
   }
 }
 

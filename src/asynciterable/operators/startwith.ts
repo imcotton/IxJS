@@ -14,12 +14,8 @@ export class StartWithAsyncIterable<TSource> extends AsyncIterableX<TSource> {
 
   async *[Symbol.asyncIterator](signal?: AbortSignal) {
     throwIfAborted(signal);
-    for (const x of this._args) {
-      yield x;
-    }
-    for await (const item of wrapWithAbort(this._source, signal)) {
-      yield item;
-    }
+    yield* this._args;
+    yield* wrapWithAbort(this._source, signal);
   }
 }
 
